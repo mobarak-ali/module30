@@ -5,6 +5,8 @@ const searchBtn = document.getElementById('search-btn');
 const search = document.getElementById('search'); // Search Value
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const title = document.getElementById('title');// title
+
 // selected image 
 let sliders = [];
 
@@ -15,27 +17,47 @@ let sliders = [];
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
 // show images 
-const showImages = (images) => {
-  imagesArea.style.display = 'block';
-  gallery.innerHTML = '';
-  // show gallery title
-  galleryHeader.style.display = 'flex';
-  images.forEach(image => {
-    let div = document.createElement('div');
-    div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
-    div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
-    gallery.appendChild(div)
-  })
-
+const showImages = (images ,query) => {
+  // fixed if no images found
+  if(images.length>0){
+    imagesArea.style.display = 'block';
+    gallery.innerHTML = '';
+    // show gallery title
+    galleryHeader.style.display = 'flex';
+    images.forEach(image => {
+      let div = document.createElement('div');
+      div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
+      div.innerHTML = `<img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
+      gallery.appendChild(div)
+    })
+  }  else{
+    imagesArea.style.display = 'none';
+    title.innerHTML = `No images found as you searched for "<i>${query}</i>"!`;
+    title.style.color = "#ff0000";
+    title.style.display = 'block';
+  }
 }
-
-const getImages = (query) => {
-  fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
+ 
+ const getImages = (query) => {
+   // If the search field is left balnk
+   if (query === "") {
+      title.innerText = "Please type something for search the images";
+      title.style.color = "#ff0000";
+      title.style.display = 'block';
+      gallery.innerHTML = '';
+      imagesArea.style.display = 'none';
+    } else{
+      title.style.display = 'none';
+      title.innerText = "";
+      search.value = "";
+           
+    fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     // FIXED: Typo
     // .then(data => showImages(data.hitS))
-    .then(data => showImages(data.hits)) 
+    .then(data => showImages(data.hits, query)) 
     .catch(err => console.log(err))
+   }
 }
 
 let slideIndex = 0;
@@ -72,9 +94,8 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  // Fixed typo from 'duration' to 'doration'
-  // const duration = document.getElementById('duration').value || 1000;
-  const duration = document.getElementById('doration').value || 1000;
+  // Fixed ID typo from 'duration' to 'doration' on index.html
+  const duration = document.getElementById('duration').value || 1000;
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
