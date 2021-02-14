@@ -35,7 +35,7 @@ Total 5 images are selected for slider
 
 ![Empty Search](/images/dots01.jpg)
 
-B. Click on a dot and open the relevent image
+B. Click on a dot and open the relevant image
 
 Here we get the 5 dots for our previously added images
 
