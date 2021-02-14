@@ -110,18 +110,16 @@ const createSlider = () => {
   // hide image aria
   imagesArea.style.display = 'none';
 
-
   
-  // const sliderContainer = document.getElementById('sliders');
-  // const dots = document.querySelector('.dots'); // dots 
-  dots.innerHTML = '';
-  sliders.forEach((slide, i = 0) => {
+  // creats dots navigation
+    dots.innerHTML = '';
+    sliders.forEach((slide, i = 0) => {
     let item = document.createElement('div');
     item.className = "slider-item";
     item.innerHTML = `<img class="w-100" src="${slide}"  alt="">`;
     sliderContainer.appendChild(item);
 
-    // creats dots navigation
+    // Adds dots navigation below slider
     const dot = `<span class="dot" onclick="changeSlide(${i++})"></span>`;
     let dotsContent = dots.innerHTML;
     dotsContent = dotsContent + dot;
@@ -155,14 +153,10 @@ const changeSlide = (index) => {
   }
 
   items.forEach(item => {
-    // item.style.display = "none"
-    // item.classList.remove('d-blook');
     item.classList.add('d-none');
   })
 
-  // items[index].style.display = "block"
   items[index].classList.remove('d-none');
-  // items[index].classList.add('d-block');
 }
 
 searchBtn.addEventListener('click', function () {
@@ -181,7 +175,6 @@ sliderBtn.addEventListener('click', function () {
 // Search After Pressing Enter Button
 search.addEventListener("keydown", function(event) {
   if (event.key === 'Enter') {
-  //  event.preventDefault();
    searchBtn.click();
   }
 });
