@@ -81,6 +81,18 @@ const createSlider = () => {
     alert('Select at least 2 image.')
     return;
   }
+
+  // Fixed ID typo from 'duration' to 'doration' on index.html
+  const duration = document.getElementById('duration').value || 1000;
+  
+  // fixed sledr duration 
+    if (duration<500){
+      alert('Slidr Duration too Fast! Make it at least 500.');
+      return;
+    } 
+  
+
+
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -94,8 +106,8 @@ const createSlider = () => {
   document.querySelector('.main').style.display = 'block';
   // hide image aria
   imagesArea.style.display = 'none';
-  // Fixed ID typo from 'duration' to 'doration' on index.html
-  const duration = document.getElementById('duration').value || 1000;
+
+
   sliders.forEach(slide => {
     let item = document.createElement('div')
     item.className = "slider-item";
@@ -131,10 +143,14 @@ const changeSlide = (index) => {
   }
 
   items.forEach(item => {
-    item.style.display = "none"
+    // item.style.display = "none"
+    // item.classList.remove('d-blook');
+    item.classList.add('d-none');
   })
 
-  items[index].style.display = "block"
+  // items[index].style.display = "block"
+  items[index].classList.remove('d-none');
+  // items[index].classList.add('d-block');
 }
 
 searchBtn.addEventListener('click', function () {
