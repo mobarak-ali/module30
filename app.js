@@ -35,7 +35,7 @@ const showImages = (images, query) => {
   }  else{ 
     // If no images found after the search
     imagesArea.style.display = 'none';
-    title.innerHTML = `No images found as you searched for "<i>${query}</i>"!`;
+    title.innerHTML = `<i>${query}</i>- is your search text, we found no related image!`;
     title.style.color = "#ff0000";
     title.style.display = 'block';
   }
@@ -44,7 +44,7 @@ const showImages = (images, query) => {
  const getImages = (query) => {
    // If the search field is left balnk
    if (query === "") {
-      title.innerText = "Please type something for search the images";
+      title.innerText = "Please type something to search the images";
       title.style.color = "#ff0000";
       title.style.display = 'block';
       gallery.innerHTML = '';
@@ -54,6 +54,8 @@ const showImages = (images, query) => {
       title.innerText = "";
       search.value = "";
            
+   console.log(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`);
+
     fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     // FIXED: Typo
