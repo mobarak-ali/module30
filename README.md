@@ -27,7 +27,7 @@ C. Clears Search Field automatically after each search
 
 
 #
-### 2. Adding dot control dynamically
+### 2. Adding dot navigation for slider
 
 A. Add images and get dot control for them
 
@@ -37,7 +37,7 @@ Total 5 images are selected for slider
 
 B. Click on a dot and open the relevent image
 
-Here we get the 5dots
+Here we get the 5 dots for our previously added images
 
 ![Empty Search](/images/dots02.jpg)
 

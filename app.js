@@ -54,8 +54,6 @@ const showImages = (images, query) => {
       title.innerText = "";
       search.value = "";
            
-   console.log(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`);
-
     fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     // FIXED: Typo
@@ -123,8 +121,7 @@ const createSlider = () => {
     item.innerHTML = `<img class="w-100" src="${slide}"  alt="">`;
     sliderContainer.appendChild(item);
 
-    // creats dots
-    console.log();
+    // creats dots navigation
     const dot = `<span class="dot" onclick="changeSlide(${i++})"></span>`;
     let dotsContent = dots.innerHTML;
     dotsContent = dotsContent + dot;
