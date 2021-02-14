@@ -6,31 +6,34 @@ const search = document.getElementById('search'); // Search Value
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
 const title = document.getElementById('title');// title
+const dots = document.querySelector('.dots'); // dots 
 
 // selected image 
 let sliders = [];
-
 
 // If this key doesn't work
 // Find the name in the url and go to their website
 // to create your own api key
 const KEY = '15674931-a9d714b6e9d654524df198e00&q';
 
-// show images 
-const showImages = (images ,query) => {
-  // fixed if no images found
+// show images at Gallery Section
+const showImages = (images, query) => {
+  // if images found after run the search
   if(images.length>0){
     imagesArea.style.display = 'block';
     gallery.innerHTML = '';
     // show gallery title
     galleryHeader.style.display = 'flex';
+
+    // Adds images to Gallery Section
     images.forEach(image => {
       let div = document.createElement('div');
       div.className = 'col-lg-3 col-md-4 col-xs-6 img-item mb-2';
       div.innerHTML = `<img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
       gallery.appendChild(div)
     })
-  }  else{
+  }  else{ 
+    // If no images found after the search
     imagesArea.style.display = 'none';
     title.innerHTML = `No images found as you searched for "<i>${query}</i>"!`;
     title.style.color = "#ff0000";
@@ -46,7 +49,7 @@ const showImages = (images ,query) => {
       title.style.display = 'block';
       gallery.innerHTML = '';
       imagesArea.style.display = 'none';
-    } else{
+    } else{ // If a valid search is made
       title.style.display = 'none';
       title.innerText = "";
       search.value = "";
@@ -92,7 +95,6 @@ const createSlider = () => {
     } 
   
 
-
   // crate slider previous next area
   sliderContainer.innerHTML = '';
   const prevNext = document.createElement('div');
@@ -104,17 +106,28 @@ const createSlider = () => {
 
   sliderContainer.appendChild(prevNext)
   document.querySelector('.main').style.display = 'block';
+
   // hide image aria
   imagesArea.style.display = 'none';
 
 
-  sliders.forEach(slide => {
-    let item = document.createElement('div')
+  
+  // const sliderContainer = document.getElementById('sliders');
+  // const dots = document.querySelector('.dots'); // dots 
+  dots.innerHTML = '';
+  sliders.forEach((slide, i = 0) => {
+    let item = document.createElement('div');
     item.className = "slider-item";
-    item.innerHTML = `<img class="w-100"
-    src="${slide}"
-    alt="">`;
-    sliderContainer.appendChild(item)
+    item.innerHTML = `<img class="w-100" src="${slide}"  alt="">`;
+    sliderContainer.appendChild(item);
+
+    // creats dots
+    console.log();
+    const dot = `<span class="dot" onclick="changeSlide(${i++})"></span>`;
+    let dotsContent = dots.innerHTML;
+    dotsContent = dotsContent + dot;
+    dots.innerHTML = dotsContent;
+
   })
   changeSlide(0)
   timer = setInterval(function () {

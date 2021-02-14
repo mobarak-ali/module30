@@ -1,6 +1,7 @@
 #sliders {
   height: 400px;
   width: 60%;
+  width: 100%;
   overflow: hidden;
   margin: 0 auto;
   position: relative;
@@ -12,7 +13,7 @@
 
 .slider-item {
   display: block;
-  animation: fade_in_slide 1s
+  /* animation: fade_in_slide 1s */
 }
 
 .img-thumbnail {
@@ -42,7 +43,9 @@ img {
   padding: 8px 10px;
   color: #fff;
 }
-
+.dots{
+  /* width: 60%; */
+}
 .dot {
   background-color: rgb(163, 156, 156);
   height: 10px;
@@ -62,6 +65,9 @@ img {
   }
   #sliders {
     height: 300px;
+    width: 90%;
+  }
+  .dots{
     width: 90%;
   }
 }
